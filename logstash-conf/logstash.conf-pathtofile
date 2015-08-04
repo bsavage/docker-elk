@@ -1,0 +1,10 @@
+input {
+  file {
+    path => "/tmp/log/jetty_2015_08_03.log"
+    start_position => "beginning"
+  }
+}
+## Add your filters here
+output {
+	elasticsearch { }
+}

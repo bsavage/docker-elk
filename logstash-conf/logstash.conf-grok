@@ -1,0 +1,19 @@
+input {
+  file {
+    path => "/home/x/jetty_2015_08_03.log"
+    type => "apache-access"  # a type to identify those logs (will need this later)
+    start_position => "beginning"
+  }
+}
+## Add your filters here
+filter {
+  if [type] == "apache-access" {   # this is where we use the type from the input section
+    grok {
+      match => [ "message", "%{GREEDYDATA:logline}" ]
+    }
+  }
+}
+
+output {
+	elasticsearch { }
+}
